@@ -1,0 +1,60 @@
+#include <iostream>
+using namespace std
+
+int knapsack(int value[], int weight[], int n, int capacity) {
+    int m[n + 1][capacity + 1]
+
+    for (int w=0
+         w <= capacity
+         w++) {
+        m[0][w] = 0
+    }
+
+    for (int i=1
+         i <= n
+         i++) {
+        for (int w=0
+             w <= capacity
+             w++) {
+            if (weight[i] > w) {
+                m[i][w] = m[i - 1][w]
+            } else {
+                m[i][w] = max(m[i - 1][w], m[i - 1][w - weight[i]] + value[i])
+            }
+        }
+    }
+
+    return m[n][capacity]
+}
+
+int main() {
+    int n
+    cout << "Enter the number of items: "
+    cin >> n
+
+    int value[n + 1]
+    int weight[n + 1]
+
+    cout << "Enter the values of the " << n << " item(s) in order: "
+    for (int i=1
+         i <= n
+         i++) {
+        cin >> value[i]
+    }
+
+    cout << "Enter the positive weights of the " << n << " item(s) in order: "
+    for (int i=1
+         i <= n
+         i++) {
+        cin >> weight[i]
+    }
+
+    int capacity
+    cout << "Enter maximum weight capacity: "
+    cin >> capacity
+
+    int ans = knapsack(value, weight, n, capacity)
+    cout << "The maximum value of items that can be carried: " << ans << endl
+
+    return 0
+}

@@ -1,0 +1,39 @@
+import random
+
+
+def deter_quicksort(arr):
+    if len(arr) <= 1:
+        return arr
+    pivot = arr[len(arr) // 2]
+    left = [x for x in arr if x < pivot]
+    right = [x for x in arr if x > pivot]
+    middle = [x for x in arr if x == pivot]
+    sorted_left = deter_quicksort(left)
+    sorted_right = deter_quicksort(right)
+    return sorted_left + middle + sorted_right
+
+
+arr = [45, 34, 89, 2, 38]
+sorted_arr = deter_quicksort(arr)
+print(sorted_arr)
+
+
+def randomized_quicksort(arr):
+    if len(arr) <= 1:
+        return arr
+
+    pivot_index = random.randint(0, len(arr) - 1)
+    pivot = arr[pivot_index]
+    left = [x for x in arr if x < pivot]
+    right = [x for x in arr if x > pivot]
+    equal = [x for x in arr if x == pivot]
+
+    sorted_left = randomized_quicksort(left)
+    sorted_right = randomized_quicksort(right)
+
+    return sorted_left + equal + sorted_right
+
+
+arr = [45, 34, 89, 2, 38]
+sorted_arr = randomized_quicksort(arr)
+print(sorted_arr)
